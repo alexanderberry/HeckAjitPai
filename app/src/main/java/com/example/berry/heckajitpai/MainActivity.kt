@@ -29,12 +29,12 @@ class MainActivity : AppCompatActivity(), AsyncCallBackListener {
         validNamesRaw.add("addressentity")
         validNamesRaw.add("text_data")
         val gson: Gson = GsonBuilder()
-                .setExclusionStrategies(object: ExclusionStrategy{
+                .setExclusionStrategies(object: ExclusionStrategy {
                     override fun shouldSkipField(f: FieldAttributes?): Boolean {
-                        return f!!.name !in validNamesRaw
+                        return f!!.name.contains("description") || f.name.contains("name")
                     }
                     override fun shouldSkipClass(clazz: Class<*>?): Boolean {
-                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                        return false
                     }
                 })
                 .create()
@@ -43,14 +43,17 @@ class MainActivity : AppCompatActivity(), AsyncCallBackListener {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
         val api: FilingSearchAPI = retrofit.create(FilingSearchAPI::class.java)
-        val call: Call<List<Filing>> = api.getFilings("gM0QT1ioa6m1foa6A2fXINC70gBbsgYAb5E5BHKg", "Restoring Internet Freedom", "autocomplete_open", "Alexander Berry")
-        call.enqueue(object: Callback<List<Filing>>{
-            override fun onResponse(call: Call<List<Filing>>?, response: Response<List<Filing>>?) {
+        val call: Call<Filings> = api.getFilings("gM0QT1ioa6m1foa6A2fXINC70gBbsgYAb5E5BHKg", "Restoring Internet Freedom", "autocomplete_open", "Alexander Berry")
+        call.enqueue(object: Callback<Filings>{
+            override fun onResponse(call: Call<Filings>?, response: Response<Filings>?) {
                 Log.d(tag, "IT WORKED PT 2 FT KOTLIN " + response)
             }
 
-            override fun onFailure(call: Call<List<Filing>>?, t: Throwable?) {
+            override fun onFailure(call: Call<Filings>?, t: Throwable?) {
                 Log.e("MainActivity: ", t?.message)
+                for(stackTrace:StackTraceElement in t?.stackTrace!!){
+                    Log.e(tag, stackTrace.toString())
+                }
             }
         })
     }
