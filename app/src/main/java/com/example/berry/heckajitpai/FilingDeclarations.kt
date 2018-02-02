@@ -28,7 +28,7 @@ data class ExpressComment(
 )
 
 data class Bucket(
-		val key: Int, //1
+//		val key: Int, //1
 		val doc_count: Int //20
 )
 
@@ -102,7 +102,7 @@ data class Filing(
 		val date_submission: String, //2017-05-23T22:08:27+00:00
 		val date_disseminated: String, //2017-06-03T02:05:16.000Z
 		val filingstatus: Filingstatus,
-		val proceedings: List<Proceeding>,
+//		val proceedings: List<Proceeding>,
 		val presented_to: List<Any>,
 		val date_received: String, //2017-05-23T22:08:27+00:00
 		val text_data: String, //To the FCC:  I'm a voter worried about an open Internet. I suggest you to rescind The Obama/Wheeler plan to take over the Internet. Individuals, not so-called experts, should be empowered to enjoy which products we desire. The Obama/Wheeler plan to take over the Internet is a distortion of net neutrality. It disrupted a hands-off policy that worked fabulously smoothly for many years with broad bipartisan support.
@@ -136,11 +136,11 @@ data class Filingstatus(
 		val id: Int //30
 )
 
-data class Proceeding(
-		val id_proceeding: String, //301759
-		val name: String, //17-108
-		val description: String //Restoring Internet Freedom
-)
+//data class Proceeding(
+//		val id_proceeding: String, //301759
+//		val name: String, //17-108
+//		val description: String //Restoring Internet Freedom
+//)
 
 data class Addressentity(
 		val city: String, //Denton

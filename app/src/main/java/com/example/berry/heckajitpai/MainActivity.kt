@@ -24,13 +24,19 @@ class MainActivity : AppCompatActivity(), AsyncCallBackListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val filingAdapter = FilingsAdapter(this, arrayListOf())
+        val filingAdapter = FilingsAdapter(this, arrayListOf(), object: OnItemClickListener{
+            override fun onItemClick(item: Filing) {
+
+            }
+
+        })
+
         recycler_view.layoutManager = LinearLayoutManager(this)
         recycler_view.adapter = filingAdapter
         val gson: Gson = GsonBuilder()
                 .setExclusionStrategies(object: ExclusionStrategy {
                     override fun shouldSkipField(f: FieldAttributes?): Boolean {
-                        return f!!.name.contains("description") || f.name.contains("name")
+                        return f!!.name.contains("description")
                     }
                     override fun shouldSkipClass(clazz: Class<*>?): Boolean {
                         return false
