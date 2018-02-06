@@ -29,7 +29,8 @@ class FilingsAdapter(context: Context, var filings: List<Filing>, var onItemClic
             else{
                 filer_name.text = filing.filers[0].name
             }
-            filing_text.text = filing.text_data.substring(0,30) + "..."
+//            filing_text.text = filing.text_data.substring(0,30) + "..."
+            filing_text.text = filing.text_data
             date_received.text = filing.date_received.substring(0,10)
             date_posted.text = filing.date_disseminated.substring(0,10)
             itemView.setOnClickListener(object: View.OnClickListener {
